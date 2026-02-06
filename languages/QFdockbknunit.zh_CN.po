@@ -1,0 +1,67 @@
+# Chinese (Simplified) translations for package.
+# Copyright (C) 2024 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# <Your Name> <email@example.com>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: QFDockBknUnit\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0800\n"
+"PO-Revision-Date: 2024-01-01 00:00+0800\n"
+"Last-Translator: <Your Name> <email@example.com>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0\n"
+
+#: qfdockbknunit.backupfailed
+msgid "Backup failed"
+msgstr "备份失败"
+
+#: qfdockbknunit.backupsuccessful
+msgid "Backup successful"
+msgstr "备份成功"
+
+#: qfdockbknunit.btnbackupcaption
+msgid "Backup current layout"
+msgstr "备份当前布局"
+
+#: qfdockbknunit.btnrestorecaption
+msgid "Restore selected layout"
+msgstr "恢复选中布局"
+
+#: qfdockbknunit.confirm
+msgid "confirm"
+msgstr "确认"
+
+#: qfdockbknunit.fmenuitemcaption
+msgid "AnchorDock Backup Recovery Tool"
+msgstr "Lazarus IDE布局备份恢复工具"
+
+#: qfdockbknunit.info1
+msgid "Are you sure you want to restore the window layout? This will overwrite the current layout settings。"
+msgstr "确定要恢复窗口布局吗？这将会覆盖当前的布局设置。"
+
+#: qfdockbknunit.info2
+msgid "layout restored successfully!"
+msgstr "窗口布局恢复成功！"
+
+#: qfdockbknunit.info3
+msgid "Unable to read the file"
+msgstr "无法读取文件"
+
+#: qfdockbknunit.pleaseselectthebackupfiletorestore
+msgid "Please select the backup file to restore"
+msgstr "请选择要恢复的备份文件"
+
+#: qfdockbknunit.pleasespecifythebackupfilename
+msgid "Please specify the backup file name"
+msgstr "请指定备份文件名"
+
+#: qfdockbknunit.ready
+msgid "ready"
+msgstr "就绪"
