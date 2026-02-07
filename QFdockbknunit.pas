@@ -8,7 +8,7 @@ uses
   LCLType,Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
   Buttons, ComCtrls, DOM, XMLRead, XMLWrite, FileUtil, LazFileUtils,IniFiles , DefaultTranslator,
   //IDE 需要用到的单元
-  AnchorDocking, AnchorDockStorage, AnchorDockOptionsDlg,XMLPropStorage ,
+  AnchorDocking, AnchorDockStorage, AnchorDockOptionsDlg,XMLPropStorage ,IDEOptionsIntf,
   Laz2_XMLCfg,  CompOptsIntf,  LCLProc, BaseIDEIntf, ProjectIntf, LazConfigStorage,
   IDECommands, IDEWindowIntf, LazIDEIntf, MenuIntf, Types;
 
@@ -33,6 +33,7 @@ type
     procedure btnRestoreDefaultClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
+    procedure RestoreLayout(Layoutfile:string);
   private
     FBackupFile:String;
     FBackupDir: string;
@@ -157,26 +158,16 @@ begin
   end;
 end;
 
-procedure TDockbkFrm.btnRestoreClick(Sender: TObject);
+procedure TDockbkFrm.RestoreLayout(Layoutfile:string);
 var
-  BackupFile: string;
+  DefaultFile: string;
   XMLConfig:TXMLConfigStorage;
-  Dlg: TOpenDialog;
 begin
-
-  if ListBox1.ItemIndex >= 0 then
-    BackupFile := FBackupDir + ListBox1.Items[ListBox1.ItemIndex]
-  else
-  begin
-    UpdateStatus(Pleaseselectthebackupfiletorestore, True);
-    Exit;
-  end;
-
   if MessageDlg(confirm, info1,
     mtConfirmation, [mbYes, mbNo], 0) = mrYes then
   begin
     try
-      XMLConfig:=TXMLConfigStorage.Create(BackupFile,True);
+      XMLConfig:=TXMLConfigStorage.Create(Layoutfile,True);
       DockMaster.LoadLayoutFromConfig(XMLConfig,true);
       DockMaster.LoadSettingsFromConfig(XMLConfig);
       UpdateStatus(info2, False);
@@ -186,26 +177,24 @@ begin
   end;
 end;
 
-procedure TDockbkFrm.btnRestoreDefaultClick(Sender: TObject);
+procedure TDockbkFrm.btnRestoreClick(Sender: TObject);
 var
-  DefaultFile: string;
-  XMLConfig:TXMLConfigStorage;
+  BackupFile: string;
 begin
-
-  DefaultFile :=ExtractFilePath(ParamStr(0))+'components/anchordocking/design/ADLayoutDefault.xml';
-
-  if MessageDlg(confirm, info1,
-    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  if ListBox1.ItemIndex >= 0 then
+    BackupFile := FBackupDir + ListBox1.Items[ListBox1.ItemIndex]
+  else
   begin
-    try
-      XMLConfig:=TXMLConfigStorage.Create(DefaultFile,True);
-      DockMaster.LoadLayoutFromConfig(XMLConfig,true);
-      DockMaster.LoadSettingsFromConfig(XMLConfig);
-      UpdateStatus(info2, False);
-    finally
-      XMLConfig.Free;
-    end;
+    UpdateStatus(Pleaseselectthebackupfiletorestore, True);
+    Exit;
   end;
+  RestoreLayout(BackupFile);
+end;
+
+procedure TDockbkFrm.btnRestoreDefaultClick(Sender: TObject);
+begin
+  //uses IDEOptionsIntf
+  RestoreLayout(IDEEnvironmentOptions.GetParsedLazarusDirectory+'components/anchordocking/design/ADLayoutDefault.xml');
 end;
 
 procedure TDockbkFrm.ListBox1Click(Sender: TObject);
