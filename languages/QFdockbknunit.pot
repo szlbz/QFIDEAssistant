@@ -3,49 +3,53 @@ msgstr "Content-Type: text/plain; charset=UTF-8"
 
 #: qfdockbknunit.backupfailed
 msgid "Backup failed"
-msgstr "备份失败"
+msgstr ""
 
 #: qfdockbknunit.backupsuccessful
 msgid "Backup successful"
-msgstr "备份成功"
+msgstr ""
 
 #: qfdockbknunit.btnbackupcaption
 msgid "Backup current layout"
-msgstr "备份当前布局"
+msgstr ""
 
 #: qfdockbknunit.btnrestorecaption
 msgid "Restore selected layout"
-msgstr "恢复选中布局"
+msgstr ""
+
+#: qfdockbknunit.btnrestoredefaultcaption
+msgid "Restore Layout Default"
+msgstr ""
 
 #: qfdockbknunit.confirm
 msgid "confirm"
-msgstr "确认"
+msgstr ""
 
 #: qfdockbknunit.fmenuitemcaption
 msgid "AnchorDock Backup Recovery Tool"
-msgstr "lazarus IDE布局备份恢复工具"
+msgstr ""
 
 #: qfdockbknunit.info1
 msgid "Are you sure you want to restore the window layout? This will overwrite the current layout settings。"
-msgstr "确定要恢复窗口布局吗？这将会覆盖当前的布局设置。"
+msgstr ""
 
 #: qfdockbknunit.info2
 msgid "layout restored successfully!"
-msgstr "窗口布局恢复成功!"
+msgstr ""
 
 #: qfdockbknunit.info3
 msgid "Unable to read the file"
-msgstr "无法读取文件"
+msgstr ""
 
 #: qfdockbknunit.pleaseselectthebackupfiletorestore
 msgid "Please select the backup file to restore"
-msgstr "请选择要恢复的备份文件"
+msgstr ""
 
 #: qfdockbknunit.pleasespecifythebackupfilename
 msgid "Please specify the backup file name"
-msgstr "请指定备份文件名"
+msgstr ""
 
 #: qfdockbknunit.ready
 msgid "ready"
-msgstr "就绪"
+msgstr ""
 

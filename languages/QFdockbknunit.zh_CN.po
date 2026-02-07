@@ -2,7 +2,6 @@
 # Copyright (C) 2024 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # <Your Name> <email@example.com>, 2024.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: QFDockBknUnit\n"
@@ -33,6 +32,10 @@ msgstr "备份当前布局"
 #: qfdockbknunit.btnrestorecaption
 msgid "Restore selected layout"
 msgstr "恢复选中布局"
+
+#: qfdockbknunit.btnrestoredefaultcaption
+msgid "Restore Layout Default"
+msgstr "恢复默认布局"
 
 #: qfdockbknunit.confirm
 msgid "confirm"
@@ -65,3 +68,4 @@ msgstr "请指定备份文件名"
 #: qfdockbknunit.ready
 msgid "ready"
 msgstr "就绪"
+
