@@ -56,9 +56,8 @@ object DockbkFrm: TDockbkFrm
       object ListBox1: TListBox
         AnchorSideLeft.Control = Panel3
         AnchorSideTop.Control = btnBackup
-        AnchorSideBottom.Control = btnRestore
         Left = 5
-        Height = 339
+        Height = 283
         Top = 60
         Width = 255
         Align = alClient
@@ -69,22 +68,6 @@ object DockbkFrm: TDockbkFrm
         TabOrder = 0
         TopIndex = -1
         OnClick = ListBox1Click
-      end
-      object btnRestore: TBitBtn
-        AnchorSideLeft.Control = Panel3
-        AnchorSideTop.Control = ListBox1
-        AnchorSideTop.Side = asrBottom
-        Left = 5
-        Height = 50
-        Top = 404
-        Width = 255
-        Align = alBottom
-        Anchors = [akLeft, akRight]
-        BorderSpacing.Left = 5
-        BorderSpacing.Bottom = 6
-        Caption = 'Restore selected layout'
-        TabOrder = 1
-        OnClick = btnRestoreClick
       end
       object btnBackup: TBitBtn
         AnchorSideLeft.Control = Panel3
@@ -98,8 +81,37 @@ object DockbkFrm: TDockbkFrm
         BorderSpacing.Left = 5
         BorderSpacing.Top = 5
         Caption = 'Backup current layout'
-        TabOrder = 2
+        TabOrder = 1
         OnClick = btnBackupClick
+      end
+      object btnRestoreDefault: TButton
+        AnchorSideLeft.Control = Panel3
+        Left = 5
+        Height = 50
+        Top = 404
+        Width = 255
+        Align = alBottom
+        BorderSpacing.Left = 5
+        BorderSpacing.Bottom = 6
+        Caption = 'Restore Layout Default'
+        TabOrder = 2
+        OnClick = btnRestoreDefaultClick
+      end
+      object btnRestore: TBitBtn
+        AnchorSideLeft.Control = Panel3
+        AnchorSideTop.Control = ListBox1
+        AnchorSideTop.Side = asrBottom
+        Left = 5
+        Height = 50
+        Top = 348
+        Width = 255
+        Align = alBottom
+        Anchors = [akLeft, akRight]
+        BorderSpacing.Left = 5
+        BorderSpacing.Bottom = 6
+        Caption = 'Restore selected layout'
+        TabOrder = 3
+        OnClick = btnRestoreClick
       end
     end
     object Memo1: TMemo

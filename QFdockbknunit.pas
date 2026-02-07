@@ -19,6 +19,7 @@ type
   TDockbkFrm = class(TForm)
     btnBackup: TBitBtn;
     btnRestore: TBitBtn;
+    btnRestoreDefault: TButton;
     lblStatus: TLabel;
     ListBox1: TListBox;
     Memo1: TMemo;
@@ -29,6 +30,7 @@ type
     Splitter1: TSplitter;
     procedure btnBackupClick(Sender: TObject);
     procedure btnRestoreClick(Sender: TObject);
+    procedure btnRestoreDefaultClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
   private
@@ -57,6 +59,7 @@ resourcestring
   btnBackupcaption = 'Backup current layout';
   btnRestorecaption = 'Restore selected layout';
   ready = 'ready';
+  btnRestoreDefaultcaption = 'Restore Layout Default';
 
 procedure ShowDockbkFrm(Sender: TObject);
 procedure Register;
@@ -107,7 +110,7 @@ begin
   self.Caption := FMenuItemCaption;
   btnBackup.caption := btnBackupcaption;
   btnRestore.caption := btnRestorecaption;
-
+  btnRestoreDefault.caption := btnRestoreDefaultcaption;
   // 设置默认路径
   FBackupDir := LazarusIDE.GetPrimaryConfigPath + PathDelim + 'backups' + PathDelim;
   ForceDirectories(FBackupDir);
@@ -174,6 +177,28 @@ begin
   begin
     try
       XMLConfig:=TXMLConfigStorage.Create(BackupFile,True);
+      DockMaster.LoadLayoutFromConfig(XMLConfig,true);
+      DockMaster.LoadSettingsFromConfig(XMLConfig);
+      UpdateStatus(info2, False);
+    finally
+      XMLConfig.Free;
+    end;
+  end;
+end;
+
+procedure TDockbkFrm.btnRestoreDefaultClick(Sender: TObject);
+var
+  DefaultFile: string;
+  XMLConfig:TXMLConfigStorage;
+begin
+
+  DefaultFile :=ExtractFilePath(ParamStr(0))+'components/anchordocking/design/ADLayoutDefault.xml';
+
+  if MessageDlg(confirm, info1,
+    mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    try
+      XMLConfig:=TXMLConfigStorage.Create(DefaultFile,True);
       DockMaster.LoadLayoutFromConfig(XMLConfig,true);
       DockMaster.LoadSettingsFromConfig(XMLConfig);
       UpdateStatus(info2, False);
