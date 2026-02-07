@@ -1,6 +1,6 @@
 lazarus的IDE界面很容易给搞乱，要恢复挺头大的，为此写了这个插件。  
 2026-02-07  
-增加恢复默认布局功能，解决布局乱又没备份时难以恢复布局的难题。
+增加恢复默认布局功能，解决布局乱又没备份时难以恢复布局的难题。  
 2026-02-06  
 重新调整UI，关增加中英切换（根据lazarus使用的语言）  
 <img width="708" height="726" alt="image" src="https://github.com/user-attachments/assets/d5c2f4c9-5cda-4a80-b2df-20ff3b4f7db6" />
