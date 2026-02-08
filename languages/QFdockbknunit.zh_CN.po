@@ -17,6 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.0\n"
 
+#: qfdockbknunit.adrsareyousuretodelete
+msgid "Are you sure you want to delete the backup file?"
+msgstr "您确定要删除备份文件吗？"
+
+#: qfdockbknunit.adrsunabletodeletefile
+msgid "Unable to delete the file"
+msgstr "无法删除文件"
+
 #: qfdockbknunit.backupfailed
 msgid "Backup failed"
 msgstr "备份失败"
@@ -24,6 +32,10 @@ msgstr "备份失败"
 #: qfdockbknunit.backupsuccessful
 msgid "Backup successful"
 msgstr "备份成功"
+
+#: qfdockbknunit.bthdeleteselectedlayout
+msgid "Delete selected layout"
+msgstr "选删除中的布局"
 
 #: qfdockbknunit.btnbackupcaption
 msgid "Backup current layout"
