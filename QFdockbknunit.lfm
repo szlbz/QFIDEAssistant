@@ -57,7 +57,7 @@ object DockbkFrm: TDockbkFrm
         AnchorSideLeft.Control = Panel3
         AnchorSideTop.Control = btnBackup
         Left = 5
-        Height = 283
+        Height = 213
         Top = 60
         Width = 255
         Align = alClient
@@ -103,7 +103,7 @@ object DockbkFrm: TDockbkFrm
         AnchorSideTop.Side = asrBottom
         Left = 5
         Height = 50
-        Top = 348
+        Top = 278
         Width = 255
         Align = alBottom
         Anchors = [akLeft, akRight]
@@ -112,6 +112,22 @@ object DockbkFrm: TDockbkFrm
         Caption = 'Restore selected layout'
         TabOrder = 3
         OnClick = btnRestoreClick
+      end
+      object btnDelete: TBitBtn
+        AnchorSideLeft.Control = Panel3
+        AnchorSideTop.Control = ListBox1
+        AnchorSideTop.Side = asrBottom
+        AnchorSideBottom.Control = btnRestoreDefault
+        Left = 5
+        Height = 50
+        Top = 334
+        Width = 255
+        Align = alBottom
+        BorderSpacing.Left = 5
+        BorderSpacing.Bottom = 20
+        Caption = 'Delete selected layout'
+        TabOrder = 4
+        OnClick = btnDeleteClick
       end
     end
     object Memo1: TMemo

@@ -18,6 +18,7 @@ type
 
   TDockbkFrm = class(TForm)
     btnBackup: TBitBtn;
+    btnDelete: TBitBtn;
     btnRestore: TBitBtn;
     btnRestoreDefault: TButton;
     lblStatus: TLabel;
@@ -29,6 +30,7 @@ type
     SaveDialog1: TSaveDialog;
     Splitter1: TSplitter;
     procedure btnBackupClick(Sender: TObject);
+    procedure btnDeleteClick(Sender: TObject);
     procedure btnRestoreClick(Sender: TObject);
     procedure btnRestoreDefaultClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -61,6 +63,9 @@ resourcestring
   btnRestorecaption = 'Restore selected layout';
   ready = 'ready';
   btnRestoreDefaultcaption = 'Restore Layout Default';
+  bthDeleteSelectedLayout = 'Delete selected layout';
+  adrsAreYouSureToDelete = 'Are you sure you want to delete the backup file?';
+  adrsunabletodeletefile = 'Unable to delete the file';
 
 procedure ShowDockbkFrm(Sender: TObject);
 procedure Register;
@@ -111,7 +116,9 @@ begin
   self.Caption := FMenuItemCaption;
   btnBackup.caption := btnBackupcaption;
   btnRestore.caption := btnRestorecaption;
-  btnRestoreDefault.caption := btnRestoreDefaultcaption;
+  btnRestoreDefault.caption := btnRestoreDefaultcaption;;
+  btnDelete.Caption  := bthDeleteSelectedLayout;
+
   // 设置默认路径
   FBackupDir := LazarusIDE.GetPrimaryConfigPath + PathDelim + 'backups' + PathDelim;
   ForceDirectories(FBackupDir);
@@ -155,6 +162,24 @@ begin
     on E: Exception do begin
       UpdateStatus(Backupfailed, True);
     end;
+  end;
+end;
+
+procedure TDockbkFrm.btnDeleteClick(Sender: TObject);
+var
+  BackupFile: String;
+begin
+  Assert(ListBox1.ItemIndex>=0, 'TDockBackupFrm.btnDeleteClick: ListBox1.ItemIndex');
+  BackupFile := FBackupDir + ListBox1.Items[ListBox1.ItemIndex];
+  if MessageDlg(Confirm, adrsAreYouSureToDelete,
+                mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    if DeleteFile(BackupFile) then begin
+      UpdateStatus(Ready);
+      LoadBackupList;
+    end
+    else
+      UpdateStatus(adrsUnableToDeleteFile, True);
   end;
 end;
 
