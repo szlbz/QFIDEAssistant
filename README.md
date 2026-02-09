@@ -8,3 +8,4 @@ lazarus的IDE界面很容易给搞乱，要恢复挺头大的，为此写了这�
 <img width="714" height="557" alt="image" src="https://github.com/user-attachments/assets/581152b3-1a2f-4ea8-9a04-12af1608eee1" />
 <img width="714" height="557" alt="image" src="https://github.com/user-attachments/assets/5be3b3cc-ed58-42c8-a436-7b7dd49c2cee" />
 <img width="715" height="548" alt="image" src="https://github.com/user-attachments/assets/8648241d-3660-49c0-a0b4-3401f494b4e3" />
+<img width="710" height="548" alt="image" src="https://github.com/user-attachments/assets/ff191cbf-f280-4850-bf90-d89e1b3fce11" />
