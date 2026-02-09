@@ -5,13 +5,11 @@ unit QFdockbknunit;
 interface
 
 uses
-  LCLType,Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  Buttons, ComCtrls, DOM, XMLRead, XMLWrite, FileUtil, LazFileUtils,IniFiles , DefaultTranslator,
+  LCLType,Classes, SysUtils, Forms, Controls, Graphics, StdCtrls, ExtCtrls,
+  Buttons, FileUtil, LazFileUtils, Dialogs, DefaultTranslator,
   //IDE 需要用到的单元
-  AnchorDocking, AnchorDockStorage, AnchorDockOptionsDlg,XMLPropStorage ,IDEOptionsIntf,
-  Laz2_XMLCfg,  CompOptsIntf,  LCLProc, BaseIDEIntf, ProjectIntf, LazConfigStorage,
-  IDEImagesIntf,
-  IDECommands, IDEWindowIntf, LazIDEIntf, MenuIntf, Types;
+  AnchorDocking,  XMLPropStorage, IDEOptionsIntf, IDEImagesIntf,
+  IDECommands, IDEWindowIntf, LazIDEIntf, MenuIntf;
 
 type
 
@@ -28,7 +26,6 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
-    SaveDialog1: TSaveDialog;
     Splitter1: TSplitter;
     procedure btnBackupClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
@@ -40,7 +37,6 @@ type
   private
     FBackupFile:String;
     FBackupDir: string;
-    FConfigFile: string;
     procedure LoadBackupList;
     procedure UpdateStatus(const Msg: string; IsError: Boolean = False);
   public
@@ -87,7 +83,7 @@ var
   CmdCatToolMenu: TIDECommandCategory;
   ToolQFCompilerRunCommand: TIDECommand;
   MenuItemCaption: String;
-  MenuCommand: TIDEMenuCommand;
+  //MenuCommand: TIDEMenuCommand;
 begin
   // register shortcut and menu item
   MenuItemCaption:=FMenuItemCaption;//'AnchorDock Backup Recovery Tool';// <- this caption should be replaced by a resourcestring
@@ -101,7 +97,7 @@ begin
     CleanIDEShortCut, nil, @ShowDockbkFrm);
 
   // register menu item in Project menu
-  MenuCommand:=RegisterIDEMenuCommand(mnuTools,//mnuRun, //新注册菜单的位置
+  RegisterIDEMenuCommand(mnuTools,//mnuRun, //新注册菜单的位置
     'QFDockbk', //菜单名--唯一标识（不能有中文）
     MenuItemCaption,//菜单标题
     nil, nil,ToolQFCompilerRunCommand);
@@ -111,8 +107,6 @@ end;
 { TDockbkFrm }
 
 procedure TDockbkFrm.FormCreate(Sender: TObject);
-var
-  ini:TiniFile;
 begin
   self.Caption := FMenuItemCaption;
   btnBackup.caption := btnBackupcaption;
