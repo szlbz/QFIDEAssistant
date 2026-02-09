@@ -10,6 +10,7 @@ uses
   //IDE 需要用到的单元
   AnchorDocking, AnchorDockStorage, AnchorDockOptionsDlg,XMLPropStorage ,IDEOptionsIntf,
   Laz2_XMLCfg,  CompOptsIntf,  LCLProc, BaseIDEIntf, ProjectIntf, LazConfigStorage,
+  IDEImagesIntf,
   IDECommands, IDEWindowIntf, LazIDEIntf, MenuIntf, Types;
 
 type
@@ -20,7 +21,7 @@ type
     btnBackup: TBitBtn;
     btnDelete: TBitBtn;
     btnRestore: TBitBtn;
-    btnRestoreDefault: TButton;
+    btnDefault: TBitBtn;
     lblStatus: TLabel;
     ListBox1: TListBox;
     Memo1: TMemo;
@@ -32,7 +33,7 @@ type
     procedure btnBackupClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
     procedure btnRestoreClick(Sender: TObject);
-    procedure btnRestoreDefaultClick(Sender: TObject);
+    procedure btnDefaultClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
     procedure RestoreLayout(Layoutfile:string);
@@ -116,16 +117,19 @@ begin
   self.Caption := FMenuItemCaption;
   btnBackup.caption := btnBackupcaption;
   btnRestore.caption := btnRestorecaption;
-  btnRestoreDefault.caption := btnRestoreDefaultcaption;;
+  btnDefault.caption := btnRestoreDefaultcaption;;
   btnDelete.Caption  := bthDeleteSelectedLayout;
+  IDEImages.AssignImage(btnBackup,  'menu_saveas');
+  IDEImages.AssignImage(btnRestore, 'restore_default');
+  IDEImages.AssignImage(btnDelete,  'laz_delete');
+  IDEImages.AssignImage(btnDefault, 'ce_default');
+  btnRestore.Enabled := False;  // Until a filename is selected.
+  btnDelete.Enabled  := False;
 
   // 设置默认路径
-  FBackupDir := LazarusIDE.GetPrimaryConfigPath + PathDelim + 'backups' + PathDelim;
-  ForceDirectories(FBackupDir);
-
-  // 设置默认备份文件名
-  FBackupFile := FBackupDir + 'dockbackup_' +
-    FormatDateTime('yyyy-mm-dd_hhnnss', Now) + '.xml';
+  FBackupDir := AppendPathDelim(LazarusIDE.GetPrimaryConfigPath) + 'backups' + PathDelim;
+  if not DirectoryExists(FBackupDir) then
+    ForceDirectories(FBackupDir);
 
   // 加载备份列表
   LoadBackupList;
@@ -185,7 +189,6 @@ end;
 
 procedure TDockbkFrm.RestoreLayout(Layoutfile:string);
 var
-  DefaultFile: string;
   XMLConfig:TXMLConfigStorage;
 begin
   if MessageDlg(confirm, info1,
@@ -216,7 +219,7 @@ begin
   RestoreLayout(BackupFile);
 end;
 
-procedure TDockbkFrm.btnRestoreDefaultClick(Sender: TObject);
+procedure TDockbkFrm.btnDefaultClick(Sender: TObject);
 begin
   //uses IDEOptionsIntf
   RestoreLayout(IDEEnvironmentOptions.GetParsedLazarusDirectory+'components/anchordocking/design/ADLayoutDefault.xml');
@@ -224,6 +227,9 @@ end;
 
 procedure TDockbkFrm.ListBox1Click(Sender: TObject);
 begin
+  btnRestore.Enabled := ListBox1.ItemIndex >= 0;
+  btnDelete.Enabled := btnRestore.Enabled;
+
   if ListBox1.ItemIndex >= 0 then
   begin
     UpdateStatus(ListBox1.Items[ListBox1.ItemIndex],False);

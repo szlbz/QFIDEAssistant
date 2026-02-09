@@ -84,7 +84,7 @@ object DockbkFrm: TDockbkFrm
         TabOrder = 1
         OnClick = btnBackupClick
       end
-      object btnRestoreDefault: TButton
+      object btnDefault: TBitBtn
         AnchorSideLeft.Control = Panel3
         Left = 5
         Height = 50
@@ -95,7 +95,7 @@ object DockbkFrm: TDockbkFrm
         BorderSpacing.Bottom = 6
         Caption = 'Restore Layout Default'
         TabOrder = 2
-        OnClick = btnRestoreDefaultClick
+        OnClick = btnDefaultClick
       end
       object btnRestore: TBitBtn
         AnchorSideLeft.Control = Panel3
@@ -117,7 +117,7 @@ object DockbkFrm: TDockbkFrm
         AnchorSideLeft.Control = Panel3
         AnchorSideTop.Control = ListBox1
         AnchorSideTop.Side = asrBottom
-        AnchorSideBottom.Control = btnRestoreDefault
+        AnchorSideBottom.Control = btnDefault
         Left = 5
         Height = 50
         Top = 334
