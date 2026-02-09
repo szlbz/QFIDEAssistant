@@ -83,7 +83,6 @@ var
   CmdCatToolMenu: TIDECommandCategory;
   ToolQFCompilerRunCommand: TIDECommand;
   MenuItemCaption: String;
-  //MenuCommand: TIDEMenuCommand;
 begin
   // register shortcut and menu item
   MenuItemCaption:=FMenuItemCaption;//'AnchorDock Backup Recovery Tool';// <- this caption should be replaced by a resourcestring
