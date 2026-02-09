@@ -35,7 +35,7 @@ msgstr "备份成功"
 
 #: qfdockbknunit.bthdeleteselectedlayout
 msgid "Delete selected layout"
-msgstr "选删除中的布局"
+msgstr "删除选中的布局"
 
 #: qfdockbknunit.btnbackupcaption
 msgid "Backup current layout"
