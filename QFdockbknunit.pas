@@ -8,7 +8,7 @@ uses
   LCLType,Classes, SysUtils, Forms, Controls, Graphics, StdCtrls, ExtCtrls,
   Buttons, FileUtil, LazFileUtils, Dialogs, DefaultTranslator,
   //IDE 需要用到的单元
-  AnchorDocking,  XMLPropStorage, IDEOptionsIntf, IDEImagesIntf,
+  AnchorDocking,  XMLPropStorage, Menus, IDEOptionsIntf, IDEImagesIntf,
   IDECommands, IDEWindowIntf, LazIDEIntf, MenuIntf;
 
 type
@@ -23,9 +23,11 @@ type
     lblStatus: TLabel;
     ListBox1: TListBox;
     Memo1: TMemo;
+    MenuItem1: TMenuItem;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
+    PopupMenu1: TPopupMenu;
     Splitter1: TSplitter;
     procedure btnBackupClick(Sender: TObject);
     procedure btnDeleteClick(Sender: TObject);
@@ -33,6 +35,8 @@ type
     procedure btnDefaultClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure ListBox1Click(Sender: TObject);
+    procedure ListBox1DblClick(Sender: TObject);
+    procedure MenuItem1Click(Sender: TObject);
     procedure RestoreLayout(Layoutfile:string);
   private
     FBackupFile:String;
@@ -63,6 +67,10 @@ resourcestring
   bthDeleteSelectedLayout = 'Delete selected layout';
   adrsAreYouSureToDelete = 'Are you sure you want to delete the backup file?';
   adrsunabletodeletefile = 'Unable to delete the file';
+  Filealreadyexists = 'File already exists!';
+  Rename_Rename = 'Rename';
+  Rename_Prompt = 'File name to be renamed';
+
 
 procedure ShowDockbkFrm(Sender: TObject);
 procedure Register;
@@ -112,6 +120,7 @@ begin
   btnRestore.caption := btnRestorecaption;
   btnDefault.caption := btnRestoreDefaultcaption;;
   btnDelete.Caption  := bthDeleteSelectedLayout;
+  MenuItem1.Caption := Rename_Rename;
   IDEImages.AssignImage(btnBackup,  'menu_saveas');
   IDEImages.AssignImage(btnRestore, 'restore_default');
   IDEImages.AssignImage(btnDelete,  'laz_delete');
@@ -210,12 +219,14 @@ begin
     Exit;
   end;
   RestoreLayout(BackupFile);
+  Close;
 end;
 
 procedure TDockbkFrm.btnDefaultClick(Sender: TObject);
 begin
   //uses IDEOptionsIntf
   RestoreLayout(IDEEnvironmentOptions.GetParsedLazarusDirectory+'components/anchordocking/design/ADLayoutDefault.xml');
+  Close;
 end;
 
 procedure TDockbkFrm.ListBox1Click(Sender: TObject);
@@ -235,6 +246,34 @@ begin
       on E: Exception do
         Memo1.Lines.Add(info3+': ' + E.Message);
     end;
+  end;
+end;
+
+procedure TDockbkFrm.ListBox1DblClick(Sender: TObject);
+begin
+  btnRestoreClick(Self);
+end;
+
+procedure TDockbkFrm.MenuItem1Click(Sender: TObject);
+var
+  f1,f2:String;
+begin
+  if ListBox1.ItemIndex<0 then
+    Exit;
+  f1:=ListBox1.Items[ListBox1.ItemIndex];
+  f2:=InputBox(Rename_Rename,Rename_Prompt,f1);
+  if f1=f2 then
+    Exit;
+  if FileExists(FBackupDir + f1) then
+  begin
+    if FileExists(FBackupDir + f2) then
+    begin
+      ShowMessage(f2+' '+Filealreadyexists);
+      Exit;
+    end;
+    RenameFile(FBackupDir + f1,FBackupDir + f2);
+    Sleep(100);
+    LoadBackupList;
   end;
 end;
 

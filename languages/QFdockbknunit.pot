@@ -37,6 +37,10 @@ msgstr ""
 msgid "confirm"
 msgstr ""
 
+#: qfdockbknunit.filealreadyexists
+msgid "File already exists!"
+msgstr ""
+
 #: qfdockbknunit.fmenuitemcaption
 msgid "AnchorDock Backup Recovery Tool"
 msgstr ""
@@ -63,5 +67,15 @@ msgstr ""
 
 #: qfdockbknunit.ready
 msgid "ready"
+msgstr ""
+
+#: qfdockbknunit.rename_prompt
+msgctxt "qfdockbknunit.rename_prompt"
+msgid "File name to be renamed"
+msgstr ""
+
+#: qfdockbknunit.rename_rename
+msgctxt "qfdockbknunit.rename_rename"
+msgid "Rename"
 msgstr ""
 
